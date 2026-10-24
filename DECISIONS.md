@@ -39,3 +39,12 @@ Every deviation from the project brief, plus workarounds, version pins and thres
 | F3 | **LoRA dropout 0.05 kept** even though Unsloth warns that only dropout=0 gets its fast patching | The brief specifies 0.05. It's identical across arms and only costs speed. |
 | F4 | **Merge with AlignTune `PEFTMerger.merge_lora(..., torch_dtype="float16")`**, then serve the merged folder with SGLang | Verified end to end in a probe: the merged smoke model was served and answered in the right format. |
 | F5 | The TRL and Unsloth backends **can't be used in the same Python process** (once imported, Unsloth patches TRL's `SFTTrainer` globally → `RuntimeError: Unsloth: You must specify a formatting_func`) | Notebook 05 only uses Unsloth. Restart the kernel between experiments that mix them. |
+
+## Generation and curation settings (pilot-driven)
+
+| # | Decision | Reason |
+|---|---|---|
+| G1 | **N = 300 source abstracts** (the brief's T4 default is 600) | Pilot timing on the T4 with the 7B-AWQ generator and judge was 311 s per 30 abstracts (generation plus both LLM gates), so 600 abstracts would take ~1 h 50 m. The user chose N=300 to fit the hackathon deadline; the brief's time box allows this cut. A smaller (3B) generator/judge was considered and rejected. It would weaken both the teacher signal and the gate's ability to tell good from bad, which is the thing PS #8 measures. |
+| G2 | **Thresholds: grounding ≥ 0.80, reward ≥ 0.75** (both started at 0.7) | Pilot on 30 abstracts → 86 QA (`data/pilot_runs.json`). At 0.7/0.7 only 19% were rejected (below the 30–60% target). The judge scores sit on a coarse grid. Simulated sweep over the pilot's recorded scores: 0.8/0.75 → 40% rejected (+2 diversity), 0.85/0.70 → 57%, any reward ≥0.80 → ≥74%. We picked 0.8/0.75, mid-band, with both judges contributing. |
+| G3 | **The generator is also the judge** (one SGLang server, Qwen2.5-7B-Instruct-AWQ) | Only one 7B model fits on the T4 at a time. CuratorKIT recommends a separate judge to avoid self-leniency, and the pilot shows that leniency: at 0.7, grounding rejected only 3/86. This is a limitation, and the reward threshold compensates for it. |
+| G4 | The sampling seed is passed to SGLang through `llm_extra_body={"seed": 42}` (generator temperature 0.7, judge 0.1) | For reproducibility. The output is not guaranteed bit-identical across batch compositions. |

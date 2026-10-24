@@ -4,7 +4,7 @@ data:
   hf_id: qiaojin/PubMedQA
   test_size: 500           # stratified from pqa_labeled; final evaluation only
   n_fewshot: 5             # from DEV, used in the generation prompt
-  n_source: null           # null -> profile default
+  n_source: 300            # null -> profile default; 300 chosen for time (see DECISIONS G1)
 
 student: Qwen/Qwen2.5-1.5B-Instruct
 
@@ -12,8 +12,8 @@ generation:
   num_questions: 3
   llm_temperature: 0.7
   llm_max_tokens: 1024
-  hallucination_threshold: 0.7
-  reward_threshold: 0.7
+  hallucination_threshold: 0.8   # tuned on 30-abstract pilot (DECISIONS G2)
+  reward_threshold: 0.75         # tuned on 30-abstract pilot (DECISIONS G2)
   dedup: minhash               # CuratorKIT applies this to source rows (pre-generation)
   diversity_threshold: 0.92    # DiversityGate: post-generation near-duplicate QA removal
   pilot_n: 30
