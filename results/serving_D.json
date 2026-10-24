@@ -1,0 +1,12 @@
+{
+ "gpu": "Tesla T4",
+ "request_throughput": 2.4024942492525247,
+ "input_throughput": 1230.0770556172927,
+ "output_throughput": 307.51926390432317,
+ "median_e2e_latency_ms": 13075.601576500048,
+ "p99_e2e_latency_ms": 13330.379253839965,
+ "median_ttft_ms": 4475.210280000283,
+ "median_itl_ms": 35.92299350020767,
+ "completed": 200,
+ "max_concurrency": 32
+}

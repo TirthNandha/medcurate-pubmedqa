@@ -1,0 +1,64 @@
+{
+ "model": "B",
+ "n": 500,
+ "accuracy": 0.604,
+ "macro_f1": 0.5169710552967194,
+ "f1_per_class": {
+  "yes": 0.7427466150870407,
+  "no": 0.609271523178808,
+  "maybe": 0.19889502762430938
+ },
+ "format_failure_rate": 0.0,
+ "confusion": {
+  "labels": [
+   "yes",
+   "no",
+   "maybe",
+   "invalid"
+  ],
+  "matrix": [
+   [
+    192,
+    28,
+    56,
+    0
+   ],
+   [
+    25,
+    92,
+    52,
+    0
+   ],
+   [
+    24,
+    13,
+    18,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    0
+   ]
+  ]
+ },
+ "accuracy_ci95": [
+  0.562,
+  0.646
+ ],
+ "macro_f1_ci95": [
+  0.47777632153778943,
+  0.5598312663354136
+ ],
+ "lexical_groundedness": 0.7803143917200398,
+ "auditkit_headline": {
+  "label_accuracy": 0.604,
+  "format_ok": 1.0,
+  "lexical_groundedness": 0.7803143917200398
+ },
+ "auditkit_run_id": "a3121295c47f6424",
+ "auditkit_fingerprint": "a3121295c47f6424",
+ "auditkit_errors": 0,
+ "eval_wall_s": 124.17491555213928
+}

@@ -1,0 +1,6 @@
+flashinfer-python==0.7.1
+ninja==1.13.2
+sglang==0.5.22
+torch==2.14.1
+transformers==5.19.0
+xgrammar==0.2.7

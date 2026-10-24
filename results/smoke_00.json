@@ -1,0 +1,12 @@
+{
+ "sglang_chat": "Reasoning: The abstract states that aspirin reduced 30-day mortality from 12% to 8%, with a p-value of 0.01, indicating statistical significance.\nAnswer: yes",
+ "curator": {
+  "passed": 1,
+  "rejected": 6
+ },
+ "auditkit": {
+  "label_accuracy": 0.8,
+  "format_ok": 1.0
+ },
+ "aligntune": "{'task_type': 'sft', 'training_time': 74.86380171775818, 'final_loss': 2.1351191282272337, 'total_steps': 5, 'model_path': '/content/drive/MyDrive/ps8/artifacts/smoke/sft', 'training_history': []}"
+}

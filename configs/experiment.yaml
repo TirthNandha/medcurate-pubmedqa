@@ -26,8 +26,8 @@ train:                     # identical for arms B, C, D
   learning_rate: 2.0e-4
   num_epochs: 2
   max_seq_length: 1024
-  per_device_batch_size: 4
-  gradient_accumulation_steps: 4   # effective batch 16
+  per_device_batch_size: 2        # 4 OOMed on T4 (DECISIONS F6)
+  gradient_accumulation_steps: 8   # effective batch 16
   lr_scheduler: cosine
   warmup_ratio: 0.03
 

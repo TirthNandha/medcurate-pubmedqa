@@ -1,0 +1,5 @@
+{
+ "generator": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+ "gpu": "t4",
+ "failed": {}
+}

@@ -1,0 +1,33 @@
+[
+ {
+  "hall": 0.7,
+  "reward": 0.7,
+  "generator": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "wall_s": 311,
+  "generated_qa": 86,
+  "passed": 70,
+  "rejected_qa": 16,
+  "rejection_rate": 0.18604651162790697,
+  "source_level_failures": 0,
+  "rejected_by_step": {
+   "HallucinationGate": 3,
+   "RewardGate": 11,
+   "DiversityGate": 2
+  },
+  "rejected_by_reason": {
+   "hallucination_contract_failed": 3,
+   "below_reward_threshold": 11,
+   "diversity_gate": 2
+  },
+  "labels_passed": {
+   "yes": 39,
+   "no": 24,
+   "maybe": 7
+  },
+  "labels_rejected": {
+   "no": 6,
+   "maybe": 7,
+   "yes": 3
+  }
+ }
+]

@@ -1,0 +1,21 @@
+{
+ "pqa_labeled": {
+  "yes": 552,
+  "no": 338,
+  "maybe": 110
+ },
+ "test": {
+  "no": 169,
+  "yes": 276,
+  "maybe": 55
+ },
+ "dev": {
+  "yes": 276,
+  "no": 169,
+  "maybe": 55
+ },
+ "n_source": 300,
+ "overlap_test_dev": 0,
+ "overlap_source_labelled": 0,
+ "seed": 42
+}

@@ -1,0 +1,27 @@
+{
+ "D_right_B_wrong": 75,
+ "B_right_D_wrong": 42,
+ "examples": [
+  {
+   "pubid": 23321509,
+   "question": "Quaternary cytoreductive surgery in ovarian cancer: does surgical effort still matter?",
+   "gold": "yes",
+   "B_output": "The study found that rates of major operative morbidity and 30-day mortality were low, but it did not provide a direct comparison between different levels of effort.\nAnswer: maybe",
+   "D_output": "The study found that rates of major operative morbidity and 30-day mortality were low, and that mean OS for patients without vs any tumour residuals was significantly higher. This suggests that surgical effort still matters in terms of patient outcomes.\nAnswer: yes"
+  },
+  {
+   "pubid": 8910148,
+   "question": "Transesophageal echocardiographic assessment of left ventricular function in brain-dead patients: are marginally acceptable hearts suitable for transplantation?",
+   "gold": "yes",
+   "B_output": "The study found that 9 out of the 36 transplanted hearts had an FAC below 50%, indicating marginal left ventricular function. However, these patients were successfully transplanted.\nAnswer: maybe",
+   "D_output": "The study found that 40 out of 55 potential heart donors had an FAC below 50%, which is considered marginal. However, only 9 patients had a FAC less than 50% (group H2), and all these patients died. The remaining 36 hearts were successfully transplanted. This suggests that even marginally acceptable hearts (FAC<50%) can be suitable for transplantation.\nAnswer: yes"
+  },
+  {
+   "pubid": 12172698,
+   "question": "Is withdrawal-induced anxiety in alcoholism based on beta-endorphin deficiency?",
+   "gold": "yes",
+   "B_output": "The study found that self-rated anxiety decreased significantly between day 1 and day 14, but it did not establish a direct link between withdrawal-induced anxiety and beta-endorphin deficiency.\nAnswer: no",
+   "D_output": "The study found that self-rated anxiety decreased significantly between day 1 and day 14, and levels of beta E were inversely correlated with anxiety. This suggests a potential link between withdrawal-induced anxiety and beta-endorphin deficiency.\nAnswer: yes"
+  }
+ ]
+}

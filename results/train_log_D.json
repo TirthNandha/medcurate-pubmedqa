@@ -1,0 +1,107 @@
+{
+ "arm": "D",
+ "dataset": "curated",
+ "result": {
+  "task_type": "sft",
+  "training_time": 434.3351950645447,
+  "final_loss": 1.4024132639169693,
+  "total_steps": 48,
+  "model_path": "/content/drive/MyDrive/ps8/artifacts/adapters/D",
+  "training_history": []
+ },
+ "log_history": [
+  {
+   "loss": 1.987044334411621,
+   "grad_norm": 0.7695537805557251,
+   "learning_rate": 0.00019906859460363307,
+   "epoch": 0.20618556701030927,
+   "step": 5
+  },
+  {
+   "loss": 1.5117895126342773,
+   "grad_norm": 0.4501911997795105,
+   "learning_rate": 0.0001887885218402375,
+   "epoch": 0.41237113402061853,
+   "step": 10
+  },
+  {
+   "loss": 1.365783977508545,
+   "grad_norm": 0.23224039375782013,
+   "learning_rate": 0.00016825531432186543,
+   "epoch": 0.6185567010309279,
+   "step": 15
+  },
+  {
+   "loss": 1.3529305458068848,
+   "grad_norm": 0.22898459434509277,
+   "learning_rate": 0.00013984010898462416,
+   "epoch": 0.8247422680412371,
+   "step": 20
+  },
+  {
+   "loss": 1.3343472480773926,
+   "grad_norm": 0.4757595658302307,
+   "learning_rate": 0.0001068242413364671,
+   "epoch": 1.0,
+   "step": 25
+  },
+  {
+   "loss": 1.3295044898986816,
+   "grad_norm": 0.23215380311012268,
+   "learning_rate": 7.302032288429756e-05,
+   "epoch": 1.2061855670103092,
+   "step": 30
+  },
+  {
+   "loss": 1.2662722587585449,
+   "grad_norm": 0.2336595356464386,
+   "learning_rate": 4.2331967788513295e-05,
+   "epoch": 1.4123711340206184,
+   "step": 35
+  },
+  {
+   "loss": 1.27034330368042,
+   "grad_norm": 0.22089073061943054,
+   "learning_rate": 1.8303010698955804e-05,
+   "epoch": 1.6185567010309279,
+   "step": 40
+  },
+  {
+   "loss": 1.2764164924621582,
+   "grad_norm": 0.23245254158973694,
+   "learning_rate": 3.7082712652200867e-06,
+   "epoch": 1.824742268041237,
+   "step": 45
+  },
+  {
+   "train_runtime": 365.0469,
+   "train_samples_per_second": 2.104,
+   "train_steps_per_second": 0.131,
+   "total_flos": 3206657187698688.0,
+   "train_loss": 1.4024132639169693,
+   "epoch": 1.9484536082474226,
+   "step": 48
+  }
+ ],
+ "hyperparameters": {
+  "lora_r": 16,
+  "lora_alpha": 32,
+  "lora_dropout": 0.05,
+  "lora_target_modules": [
+   "q_proj",
+   "k_proj",
+   "v_proj",
+   "o_proj",
+   "gate_proj",
+   "up_proj",
+   "down_proj"
+  ],
+  "learning_rate": 0.0002,
+  "num_epochs": 2,
+  "max_seq_length": 1024,
+  "per_device_batch_size": 2,
+  "gradient_accumulation_steps": 8,
+  "lr_scheduler": "cosine",
+  "warmup_ratio": 0.03
+ }
+}

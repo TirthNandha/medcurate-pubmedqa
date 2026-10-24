@@ -1,0 +1,64 @@
+{
+ "model": "C",
+ "n": 500,
+ "accuracy": 0.594,
+ "macro_f1": 0.5060036031954794,
+ "f1_per_class": {
+  "yes": 0.7470817120622568,
+  "no": 0.6033898305084746,
+  "maybe": 0.16753926701570682
+ },
+ "format_failure_rate": 0.0,
+ "confusion": {
+  "labels": [
+   "yes",
+   "no",
+   "maybe",
+   "invalid"
+  ],
+  "matrix": [
+   [
+    192,
+    23,
+    61,
+    0
+   ],
+   [
+    21,
+    89,
+    59,
+    0
+   ],
+   [
+    25,
+    14,
+    16,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    0
+   ]
+  ]
+ },
+ "accuracy_ci95": [
+  0.55,
+  0.636
+ ],
+ "macro_f1_ci95": [
+  0.46764817206152925,
+  0.5468785812576745
+ ],
+ "lexical_groundedness": 0.783661091030871,
+ "auditkit_headline": {
+  "label_accuracy": 0.594,
+  "format_ok": 1.0,
+  "lexical_groundedness": 0.783661091030871
+ },
+ "auditkit_run_id": "d2e404d2050677bc",
+ "auditkit_fingerprint": "d2e404d2050677bc",
+ "auditkit_errors": 0,
+ "eval_wall_s": 127.0769214630127
+}

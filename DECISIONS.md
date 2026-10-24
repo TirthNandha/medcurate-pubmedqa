@@ -48,3 +48,18 @@ Every deviation from the project brief, plus workarounds, version pins and thres
 | G2 | **Thresholds: grounding ≥ 0.80, reward ≥ 0.75** (both started at 0.7) | Pilot on 30 abstracts → 86 QA (`data/pilot_runs.json`). At 0.7/0.7 only 19% were rejected (below the 30–60% target). The judge scores sit on a coarse grid. Simulated sweep over the pilot's recorded scores: 0.8/0.75 → 40% rejected (+2 diversity), 0.85/0.70 → 57%, any reward ≥0.80 → ≥74%. We picked 0.8/0.75, mid-band, with both judges contributing. |
 | G3 | **The generator is also the judge** (one SGLang server, Qwen2.5-7B-Instruct-AWQ) | Only one 7B model fits on the T4 at a time. CuratorKIT recommends a separate judge to avoid self-leniency, and the pilot shows that leniency: at 0.7, grounding rejected only 3/86. This is a limitation, and the reward threshold compensates for it. |
 | G4 | The sampling seed is passed to SGLang through `llm_extra_body={"seed": 42}` (generator temperature 0.7, judge 0.1) | For reproducibility. The output is not guaranteed bit-identical across batch compositions. |
+
+## Training settings (post-OOM)
+
+| # | Decision | Reason |
+|---|---|---|
+| F6 | **Per-device batch 2 × gradient accumulation 8** (effective batch 16, as specified), with **gradient checkpointing on** | The first run of notebook 05 at batch 4 × accumulation 4 hit `CUDA out of memory` on the T4 (14.56 GiB in use) during arm B. The cause is the logits over the 152k-token vocabulary at ~600-token sequences. The effective batch and all other hyperparameters are unchanged and identical for B, C and D. |
+
+## Analysis
+
+| # | Decision | Reason |
+|---|---|---|
+| A1 | **Significance comes from an exact McNemar test (accuracy) and paired-bootstrap 95% CIs of the difference (accuracy and macro-F1).** AuditKIT's `paired_bootstrap` output is still saved (`auditkit_paired_bootstrap_uncentred`) but not used for conclusions. | `auditkit/_bootstrap.py::paired_bootstrap` (AuditKIT 1.1.3 @ 71316da) resamples the per-item differences and counts `abs(mean(resample)) >= abs(observed)` without centring the differences under the null hypothesis. The bootstrap distribution is centred on the observed effect, so p ≈ 0.5 almost regardless of effect size. We saw p = 0.53 for D vs C (+7.6 points, 73 vs 35 discordant pairs), where exact McNemar gives p = 0.0003. The usual fix is to subtract the observed mean from the differences before resampling. |
+| A2 | `ak.compare_models` was not used | It runs all models in one call, but we can only serve one model at a time on a T4. Each model is evaluated separately with `ak.evaluate` on identical samples and scorers, and the per-item predictions are compared afterwards by pubid. |
+| A3 | Serving was benchmarked with `sglang.bench_serving` on random 512-in / 128-out prompts, 200 requests, 32 concurrent | These sizes match PubMedQA (median prompt ~450 tokens, answers ≤128). AuditKIT's built-in perf numbers time one batched callable call, so they don't give per-request latency. |
+| A4 | Arm B (858 rows) trains for 107 optimizer steps vs 48 for C and D | That's inherent in "train on all raw data" with identical epochs and batch size. C is the size-and-steps control. |
