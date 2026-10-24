@@ -1,0 +1,66 @@
+seed: 42
+
+data:
+  hf_id: qiaojin/PubMedQA
+  test_size: 500           # stratified from pqa_labeled; final evaluation only
+  n_fewshot: 5             # from DEV, used in the generation prompt
+  n_source: null           # null -> profile default
+
+student: Qwen/Qwen2.5-1.5B-Instruct
+
+generation:
+  num_questions: 3
+  llm_temperature: 0.7
+  llm_max_tokens: 1024
+  hallucination_threshold: 0.7
+  reward_threshold: 0.7
+  dedup: minhash               # CuratorKIT applies this to source rows (pre-generation)
+  diversity_threshold: 0.92    # DiversityGate: post-generation near-duplicate QA removal
+  pilot_n: 30
+
+train:                     # identical for arms B, C, D
+  lora_r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+  lora_target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+  learning_rate: 2.0e-4
+  num_epochs: 2
+  max_seq_length: 1024
+  per_device_batch_size: 4
+  gradient_accumulation_steps: 4   # effective batch 16
+  lr_scheduler: cosine
+  warmup_ratio: 0.03
+
+eval:
+  temperature: 0.0
+  max_tokens: 256
+  concurrency: 32
+  bootstrap_resamples: 1000
+
+sglang:
+  port: 30000
+
+profiles:
+  t4:
+    generator: Qwen/Qwen2.5-7B-Instruct-AWQ
+    generator_fallback: Qwen/Qwen2.5-3B-Instruct
+    n_source: 600
+    precision: fp16
+    sglang_args: [--dtype, float16, --attention-backend, triton, --sampling-backend, pytorch,
+                  --disable-prefill-cuda-graph]
+    generator_args: [--quantization, awq]
+    mem_fraction: 0.8
+  l4:
+    generator: Qwen/Qwen2.5-7B-Instruct
+    n_source: 1000
+    precision: bf16
+    sglang_args: [--dtype, bfloat16]
+    generator_args: []
+    mem_fraction: 0.85
+  a100:
+    generator: Qwen/Qwen2.5-7B-Instruct
+    n_source: 1000
+    precision: bf16
+    sglang_args: [--dtype, bfloat16]
+    generator_args: []
+    mem_fraction: 0.85
