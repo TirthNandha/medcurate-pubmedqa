@@ -2,6 +2,8 @@
 
 **Syntax Error 2026 · Local LLM Track · Problem statement #8, "Data-scarce domains"**
 
+**Demo video:** https://youtu.be/BcxwJX-dQ-U
+
 > Where little real data exists, generate, verify and filter synthetic training data, and show that curation measurably beats training on raw generated data.
 
 ## Why it matters
