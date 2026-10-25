@@ -163,6 +163,7 @@ Thresholds were tuned on a 30-abstract pilot (`data/pilot_runs.json`, DECISIONS 
 - **The generator is also the judge**, a single Qwen2.5-7B-AWQ, because only one 7B model fits on a T4. CuratorKIT recommends a separate judge. Self-leniency shows in the pilot: only 3/86 were rejected for grounding at 0.7. Some good samples are also rejected (see the EAS-10 example).
 - **Small scale.** 300 abstracts → 858 QA, chosen for time on a T4 (DECISIONS G1). One seed per arm, so seed-to-seed variance of fine-tuning was not measured.
 - **Loss is on the full sequence**, not assistant tokens only, because AlignTune's Unsloth path doesn't mask the prompt (DECISIONS F1). The setting is identical for all arms.
+- **Single requests can differ slightly from batched eval output.** Greedy decoding in fp16 on a T4 is batch-dependent: the eval sent 32 requests at once, the demo sends one. We replayed 40 TEST items through the live demo one at a time. The labels agreed with the eval on 40/40 items for B and 39/40 for D, and 36–37/40 outputs were identical word for word.
 - **Lexical groundedness** is a word-overlap proxy (AuditKIT `LexicalGroundedness`), not a claim-level faithfulness judge.
 - **AuditKIT `paired_bootstrap` p-values are not centred under the null**, so they come out near 0.5 regardless of effect size. We report McNemar and bootstrap CIs instead (DECISIONS A1).
 
