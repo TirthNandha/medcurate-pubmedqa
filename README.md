@@ -16,7 +16,7 @@ The question we test: does **curating** synthetic data beat training on the **ra
 
 ```mermaid
 flowchart LR
-    U[(pqa_unlabeled<br/>600 abstracts)] --> CK
+    U[(pqa_unlabeled<br/>300 abstracts)] --> CK
     F[(5 DEV few-shots)] --> CK
     subgraph S1[Stage 1 · CuratorKIT]
       CK[QA generation<br/>custom yes/no/maybe template] --> HG[HallucinationGate<br/>grounding + label check]
@@ -36,7 +36,7 @@ flowchart LR
     end
     M --> SV
     L[(pqa_labeled TEST<br/>500 expert labels)] --> AK
-    AK --> R[results + paired bootstrap]
+    AK --> R[results + McNemar / bootstrap CIs]
 ```
 
 ## How each required tool is used
