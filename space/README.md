@@ -10,4 +10,4 @@ pinned: false
 ---
 
 MedCurate: curated vs raw synthetic training data on PubMedQA (Syntax Error 2026, Local LLM track, PS #8).
-Both models are served by SGLang. Code: https://github.com/TirthNandha/medcurate-pubmedqa (private).
+Both models are served by SGLang. Code: https://github.com/TirthNandha/medcurate-pubmedqa. Demo video: https://youtu.be/BcxwJX-dQ-U
